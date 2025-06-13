@@ -63,9 +63,7 @@ if generate:
     for idx,(h,m,c) in enumerate(contacts):
         pdf.cell(0, 8, f"{idx+1}. Leitung: {h} | Marketing: {m} | Content: {c}", ln=True)
 
-    buffer = BytesIO()
-    pdf.output(buffer)
-    pdf_data = buffer.getvalue()
+   pdf_data = pdf.output(dest='S').encode('latin1')
     st.success("✅ PDF generiert")
     b64 = base64.b64encode(pdf_data).decode()
     href = f'<a href="data:application/pdf;base64,{b64}" download="{file_name}.pdf">Download 📄</a>'
